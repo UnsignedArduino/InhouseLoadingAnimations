@@ -2,7 +2,7 @@ const z: number = 100;
 const splash: InhouseLoadingAnimations.OnStart = new InhouseLoadingAnimations.OnStart(z);
 
 splash.start();
-pause(2000);
+pause(5000);
 splash.stop();
 
 scene.setBackgroundImage(img`

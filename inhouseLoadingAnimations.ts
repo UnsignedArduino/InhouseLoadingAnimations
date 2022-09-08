@@ -190,21 +190,92 @@ namespace InhouseLoadingAnimations {
             `, SpriteKind.InhouseLoadingAnimation));
             bg.top = 0; bg.left = 0;
 
-            const logo: Sprite = this.optimize_sprite(sprites.create(img`
-                . . . 5 5 5 . . . 5 5 5 . . .
-                . . . 5 5 5 . . . 5 5 5 . . .
-                . . . 5 5 5 . . . 5 5 5 . . .
-                . . . 5 5 5 . . . 5 5 5 . . .
-                . . . 5 5 5 . . . 5 5 5 . . .
-                . . . 5 5 5 . . . 5 5 5 . . .
-                . . . 5 5 5 . . . 5 5 5 . . .
-                . . . 5 5 5 . . . 5 5 5 . . .
-                . . . 5 5 5 . . . 5 5 5 . . .
-                5 5 5 5 5 5 . . . 5 5 5 5 5 5
-                5 5 5 5 5 5 . . . 5 5 5 5 5 5
-                5 5 5 5 5 5 . . . 5 5 5 5 5 5
+            const text: Sprite = this.optimize_sprite(sprites.create(img`
+                ..........................................................................................
+                ..........................................................................................
+                ..........................................................................................
+                ..........................................................................................
+                ..........................................................................................
+                ..........................................................................................
+                ..........................................................................................
+                ..........................................................................................
+                ..........................................................................................
+                ..........................................................................................
+                ..........................................................................................
+                ..........................................................................................
+                ..........................................................................................
+                ..........................................................................................
+                ..........................................................................................
+                ..........................................................................................
+                ..........................................................................................
+                ..........................................................................................
+                ..........................................................................................
+                ..........................................................................................
             `, SpriteKind.InhouseLoadingAnimation));
-            logo.x = scene.screenWidth() / 2; logo.y = scene.screenHeight() / 2;
+            text.right = scene.screenWidth() / 2; text.y = scene.screenHeight() / 2;
+            text.setFlag(SpriteFlag.Invisible, true);
+            text.image.print("A game by", 0, 0, 1);
+            text.image.print("UnsignedArduino", 0, 10, 1);
+
+            const logo: Sprite = this.optimize_sprite(sprites.create(img`
+                fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
+                fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
+                fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
+                fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
+                fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff555fff555fffff
+                fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff555fff555fffff
+                fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff555fff555fffff
+                fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff555fff555fffff
+                fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff555fff555fffff
+                fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff555fff555fffff
+                fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff555fff555fffff
+                fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff555fff555fffff
+                fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff555fff555fffff
+                ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff555555fff555555ff
+                ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff555555fff555555ff
+                ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff555555fff555555ff
+                fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
+                fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
+                fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
+                fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
+            `, SpriteKind.InhouseLoadingAnimation));
+            logo.right = scene.screenWidth() / 2 + (17 / 2); logo.top = scene.screenHeight(); 
+
+            logo.vy = -200; 
+            while (logo.y > scene.screenHeight() / 2) { pause(0); } 
+            logo.vy = 0; logo.y = scene.screenHeight() / 2;
+
+            pause(500);
+
+            text.setFlag(SpriteFlag.Invisible, false);
+            logo.vx = -150; text.vx = 200;
+            while (logo.right > text.left) { pause(0); }
+            const lastLogoRight: number = logo.right;
+            logo.setImage(img`
+                fffffffffffffffffff
+                fffffffffffffffffff
+                fffffffffffffffffff
+                fffffffffffffffffff
+                fffff555fff555fffff
+                fffff555fff555fffff
+                fffff555fff555fffff
+                fffff555fff555fffff
+                fffff555fff555fffff
+                fffff555fff555fffff
+                fffff555fff555fffff
+                fffff555fff555fffff
+                fffff555fff555fffff
+                ff555555fff555555ff
+                ff555555fff555555ff
+                ff555555fff555555ff
+                fffffffffffffffffff
+                fffffffffffffffffff
+                fffffffffffffffffff
+                fffffffffffffffffff
+            `);
+            logo.right = lastLogoRight - 2;
+            text.right = scene.screenWidth() - logo.left;
+            logo.vx = 0; text.vx = 0;
 
             while (true) {
                 // animation stuff here
