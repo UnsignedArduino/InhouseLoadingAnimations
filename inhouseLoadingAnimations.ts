@@ -63,7 +63,7 @@ namespace InhouseLoadingAnimations {
         }
     }
 
-    export class OnStart extends InhouseAnimation {
+    class Splash extends InhouseAnimation {
         protected start_animation(): void {
             // setup here
             const bg: Sprite = this.optimize_sprite(sprites.create(img`
@@ -290,6 +290,22 @@ namespace InhouseLoadingAnimations {
             sprites.destroyAllSpritesOfKind(SpriteKind.InhouseLoadingAnimation);
 
             this.stopped = true;
+        }
+    }
+
+    let _splash: Splash | undefined = undefined;
+
+    export function show_splash(z_index: number = 0): void {
+        if (_splash) {
+            hide_splash();
+        }
+        _splash = new Splash(z_index);
+        _splash.start();
+    }
+
+    export function hide_splash(): void {
+        if (_splash) {
+            _splash.stop();
         }
     }
 }

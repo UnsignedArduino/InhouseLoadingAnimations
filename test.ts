@@ -1,9 +1,7 @@
-const z: number = 100;
-const splash: InhouseLoadingAnimations.OnStart = new InhouseLoadingAnimations.OnStart(z);
-
-splash.start();
+pause(1000);
+InhouseLoadingAnimations.show_splash();
 pause(5000);
-splash.stop();
+InhouseLoadingAnimations.hide_splash();
 
 scene.setBackgroundImage(img`
     dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
