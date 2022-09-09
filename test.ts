@@ -1,7 +1,17 @@
+// pause(1000);
+// LoadingAnimations.show_splash();
+// pause(5000);
+// LoadingAnimations.hide_splash();
+game.consoleOverlay.setVisible(true);
+
+const loading: LoadingAnimations.Loading = new LoadingAnimations.Loading(0);
+loading.start();
+for (let i = 0; i < 100; i++) {
+    loading.current = i;
+    pause(100);
+}
 pause(1000);
-LoadingAnimations.show_splash();
-pause(5000);
-LoadingAnimations.hide_splash();
+loading.stop();
 
 scene.setBackgroundImage(img`
     dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
