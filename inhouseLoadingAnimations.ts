@@ -494,7 +494,7 @@ namespace LoadingAnimations {
                     bar.image.fillRect(
                         2, 
                         2,
-                        this.scale(this._current, this._minimum, this._maximum, 0, inner_width), 
+                        this.scale(this._current, this._minimum, this._maximum, 0, inner_width + 1), 
                         inner_height,
                         1
                     );
