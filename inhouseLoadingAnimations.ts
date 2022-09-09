@@ -2,7 +2,10 @@ namespace SpriteKind {
     export const InhouseLoadingAnimation = SpriteKind.create();
 }
 
-namespace InhouseLoadingAnimations {
+//% color="#FF9F00"
+//% icon="\uf0ae"
+//% groups="['Splash']"
+namespace LoadingAnimations {
     class InhouseAnimation {
         private running: boolean;
         protected pls_stop: boolean;
@@ -295,6 +298,15 @@ namespace InhouseLoadingAnimations {
 
     let _splash: Splash | undefined = undefined;
 
+    /**
+     * Show and start the splash screen animation. 
+     * 
+     * @param z_index The Z index of the sprites for the animation. 
+     */
+    //% block="show splash || at z %z_index"
+    //% group="Splash"
+    //% expandableArgumentMode="toggle"
+    //% weight=100
     export function show_splash(z_index: number = 0): void {
         if (_splash) {
             hide_splash();
@@ -303,6 +315,13 @@ namespace InhouseLoadingAnimations {
         _splash.start();
     }
 
+    /**
+     * Hide and destroy the splash screen animation.
+     */
+    //% block="hide splash"
+    //% group="Splash"
+    //% expandableArgumentMode="toggle"
+    //% weight=90
     export function hide_splash(): void {
         if (_splash) {
             _splash.stop();

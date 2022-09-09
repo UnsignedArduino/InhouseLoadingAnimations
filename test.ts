@@ -1,7 +1,7 @@
 pause(1000);
-InhouseLoadingAnimations.show_splash();
+LoadingAnimations.show_splash();
 pause(5000);
-InhouseLoadingAnimations.hide_splash();
+LoadingAnimations.hide_splash();
 
 scene.setBackgroundImage(img`
     dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
