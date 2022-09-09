@@ -2,16 +2,18 @@
 // LoadingAnimations.show_splash();
 // pause(5000);
 // LoadingAnimations.hide_splash();
-game.consoleOverlay.setVisible(true);
 
-const loading: LoadingAnimations.Loading = new LoadingAnimations.Loading(0);
-loading.start();
+LoadingAnimations.show_splash();
+pause(3000);
+LoadingAnimations.hide_splash();
+
+LoadingAnimations.show_loading();
 for (let i = 0; i < 100; i++) {
-    loading.current = i;
-    pause(100);
+    LoadingAnimations.change_loading_value(LoadingAnimations.LoadingValue.Current, 1);
+    pause(50);
 }
 pause(1000);
-loading.stop();
+LoadingAnimations.hide_loading();
 
 scene.setBackgroundImage(img`
     dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd

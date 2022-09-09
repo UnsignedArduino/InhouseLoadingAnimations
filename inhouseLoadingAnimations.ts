@@ -4,7 +4,7 @@ namespace SpriteKind {
 
 //% color="#FF9F00"
 //% icon="\uf0ae"
-//% groups="['Splash']"
+//% groups="['Splash', 'Loading']"
 namespace LoadingAnimations {
     class InhouseAnimation {
         private running: boolean;
@@ -302,7 +302,7 @@ namespace LoadingAnimations {
         }
     }
 
-    export class Loading extends InhouseAnimation {
+    class Loading extends InhouseAnimation {
         private _current: number;
         private _minimum: number;
         private _maximum: number;
@@ -494,7 +494,7 @@ namespace LoadingAnimations {
                     bar.image.fillRect(
                         2, 
                         2,
-                        this.scale(this._current, this._minimum, this._maximum, 0, inner_width + 1), 
+                        this.scale(this._current, this._minimum, this._maximum, 0, inner_width), 
                         inner_height,
                         1
                     );
@@ -545,5 +545,120 @@ namespace LoadingAnimations {
         if (_splash) {
             _splash.stop();
         }
+    }
+
+    let _loading: Loading | undefined = undefined;
+
+    /**
+     * Show and start the loading screen animation. 
+     * 
+     * @param z_index The Z index of the sprites for the animation. 
+     */
+    //% block="show loading || at z %z_index"
+    //% group="Loading"
+    //% expandableArgumentMode="toggle"
+    //% weight=80
+    export function show_loading(z_index: number = 0): void {
+        if (_loading) {
+            hide_loading();
+        }
+        _loading = new Loading(z_index);
+        _loading.start();
+    }
+
+    /**
+     * Hide and destroy the loading screen animation.
+     */
+    //% block="hide loading"
+    //% group="Loading"
+    //% expandableArgumentMode="toggle"
+    //% weight=70
+    export function hide_loading(): void {
+        if (_loading) {
+            _loading.stop();
+        }
+    }
+
+    export enum LoadingValue {
+        //% block="minimum"
+        Minimum,
+        //% block="current"
+        Current,
+        //% block="maximum"
+        Maximum
+    }
+
+    /**
+     * Set a value on the loading animation.
+     * 
+     * @param option A property from the LoadingValue enum.
+     * @param value The value to set it to.
+     */
+    //% block="set loading %option to %value"
+    //% group="Loading"
+    //% weight=60
+    export function set_loading_value(option: LoadingValue, value: number): void {
+        if (!_loading) {
+            return;
+        }
+        switch (option) {
+            case (LoadingValue.Minimum): {
+                _loading.minimum = value;
+                break;
+            }
+            case (LoadingValue.Current): {
+                _loading.current = value;
+                break;
+            }
+            case (LoadingValue.Maximum): {
+                _loading.maximum = value;
+                break;
+            }
+            default: {
+                throw "Not a valid property to set on the loading bar";
+            }
+        }
+    }
+
+    /**
+     * Get a value on the loading animation.
+     * 
+     * @param option A property from the LoadingValue enum.
+     * @return A number. 0 if the loading screen hasn't started yet.
+     */
+    //% block="get loading %option"
+    //% group="Loading"
+    //% weight=50
+    export function get_loading_value(option: LoadingValue): number {
+        if (!_loading) {
+            return 0;
+        }
+        switch (option) {
+            case (LoadingValue.Minimum): {
+                return _loading.minimum;
+            }
+            case (LoadingValue.Current): {
+                return _loading.current;
+            }
+            case (LoadingValue.Maximum): {
+                return _loading.maximum;
+            }
+            default: {
+                throw "Not a valid property to get on the loading bar";
+            }
+        }
+    }
+
+    /**
+     * Change a value on the loading animation.
+     * 
+     * @param option A property from the LoadingValue enum.
+     * @param value The value to set it to.
+     */
+    //% block="change loading %option by %value"
+    //% group="Loading"
+    //% weight=40
+    export function change_loading_value(option: LoadingValue, value: number): void {
+        set_loading_value(option, get_loading_value(option) + value);
     }
 }
